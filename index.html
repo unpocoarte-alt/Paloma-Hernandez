@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paloma Hernández Sánchez</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #0b2545;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px !important;
+            font-weight: 400;
+        }
+        * {
+            font-size: 12px !important;
+            text-transform: none !important;
+            text-decoration: none !important;
+            box-sizing: border-box;
+        }
+        
+        /* --- Fondo dinámico para el Hover --- */
+        #bg-hover {
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+            padding: 10vw 8vw;
+        }
+        .left-column {
+            width: 35%;
+            padding-right: 40px;
+            flex-shrink: 0;
+        }
+        .right-column {
+            width: 65%;
+            text-align: right;
+        }
+        .bio {
+            margin-top: 15px;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            opacity: 0.5;
+        }
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .nav-links a {
+            color: #0b2545;
+            cursor: pointer;
+            border-bottom: 1px solid #0b2545 !important;
+            align-self: flex-start;
+            padding-bottom: 2px;
+        }
+        .contact {
+            margin-top: 20px;
+        }
+        .content-panel {
+            display: none;
+            line-height: 1.6;
+        }
+        .content-panel.active {
+            display: block;
+        }
+        .split-panel {
+            display: flex;
+            gap: 4vw;
+            width: 100%;
+        }
+        .split-column {
+            flex: 1;
+            text-align: right;
+        }
+        
+        /* --- Clases de texto --- */
+        .italic-title { font-style: italic !important; }
+        .bold-year { font-weight: 700 !important; }
+        .underlined { text-decoration: underline !important; }
+
+        /* --- Galería Deslizante --- */
+        .gallery-title {
+            cursor: pointer;
+            font-style: italic !important;
+            display: inline-block;
+        }
+        .gallery-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-out;
+        }
+        .gallery-wrapper.open {
+            max-height: 2000px;
+            margin-top: 15px;
+        }
+        .gallery-slides {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            align-items: center;
+        }
+        .gallery-slides img {
+            flex: 0 0 100%;
+            width: 100%;
+            max-height: 65vh;
+            height: auto;
+            object-fit: contain;
+            cursor: zoom-in;
+        }
+        .gallery-controls {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+        .gallery-controls span {
+            cursor: pointer;
+        }
+
+        /* --- Modal general --- */
+        .modal {
+            display: none;
+            position: fixed !important;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.95);
+            justify-content: center;
+            align-items: center;
+            gap: 4vw;
+        }
+        .modal.show {
+            display: flex !important;
+        }
+        .modal-content {
+            max-width: 75vw;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+        .modal-btn {
+            cursor: pointer;
+            color: #0b2545;
+            user-select: none;
+        }
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            cursor: pointer;
+            color: #0b2545;
+        }
+
+        /* --- Estilo para la ventana de Textos --- */
+        .text-modal-body {
+            max-width: 600px;
+            width: 85vw;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            line-height: 1.6;
+            padding-right: 20px;
+        }
+
+        /* --- Adaptación para Móviles --- */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 12vw 8vw;
+            }
+            .left-column {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            .right-column {
+                width: 100%;
+                text-align: left;
+            }
+            .split-panel {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .split-column {
+                text-align: left;
+            }
+            .split-column:empty {
+                display: none;
+            }
+        }
+        .project-info {
+            opacity: 0.5;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del fondo que cambia -->
+    <div id="bg-hover"></div>
+
+    <div class="container">
+        <!-- Left Column -->
+        <div class="left-column">
+            <div>Paloma Hernández Sánchez</div>
+            
+            <div class="bio">
+                silence folded into matter,<br>
+                tracing the edges of time and space.
+            </div>
+
+            <!-- Tu nuevo título profesional con el margen correcto antes del menú -->
+            <div class="bio">
+                Visual Artist & Curator
+            </div>
+
+            <div class="nav-links">
+                <a onclick="showPanel('cv')">CV</a>
+                <a onclick="showPanel('projects')">Projects</a>
+                <a onclick="showPanel('last-works')">Last works</a>
+            </div>
+
+            <div class="contact">
+                contact: <a href="mailto:unpocoarte@gmail.com">unpocoarte@gmail.com</a>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+            
+            <div id="cv" class="content-panel active">
+                <div class="split-panel">
+                    <div class="split-column"></div>
+                    <div class="split-column">
+                        Gallery Assistant, KLEMM´S Galerie, Berlin, 2026<br>
+                        Gallery Assistant, Verena Kerfin Gallery, Berlin, 2026<br>
+                        Exhibition Coordinator , Atelier Canyamelar, Valencia, 2023-2025<br>
+                        Customer Service and Sales Training, Valencia, 2022<br>
+                        Conflict Resolution Training for Middle Management, Valencia, 2022<br>
+                        BFA, Politecnic University of Valencia, 2021-2025<br>
+                        Course in Visual Arts, Espacio REA, Buenos Aires, 2019<br>
+                        <br><br>
+                        -<br><br>
+                        <span class="underlined">solo exhibitions:</span><br>
+                        <span class="bold-year">2026</span><br>
+                        <span class="italic-title">Silencios Compartidos</span>, Atelier Canyamelar, Valencia<br>
+                        <br>
+                        <span class="bold-year">2024</span><br>
+                        <span class="italic-title">TU(n)EL</span>, Polytechnic University of Valencia<br>
+                        <br>
+                        <span class="bold-year">2023</span><br>
+                        <span class="italic-title">Mar Blanco</span>, Atelier Canyamelar, Valencia<br>
+                        <br><br>
+                        <span class="underlined">group exhibitions:</span><br>
+                        <span class="bold-year">2024</span><br>
+                        <span class="italic-title">Buidar Plenant</span>, Riba-roja de Túria, Valencia(<a href="catalogoBuidarPlenant.pdf" target="_blank" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important;">catalog</a>)<br>
+                        <span class="italic-title">Oh! My Bag</span>, Royal University of Bhutan, Bhutan<br>
+                        <span class="italic-title">Oh! My Mind</span>, Thammasat University, Thailand<br>
+                        <br>
+                        <span class="bold-year">2023</span><br>
+                        <span class="italic-title">Cuerpos, un nexo al mundo</span>, Chiva, Valencia<br>
+                        <br><br>
+                        -<br><br>
+                        skills:<br>
+                        custom web coding, adobe creative cloud, spatial thinking & installations, metalwork, ceramics, painting, among others<br>
+                        <br><br>
+                        soft skills:<br>
+                        effective communication, reliable work ethic, and a deep commitment to collaborative practices and ongoing research
+                    </div>
+                </div>
+            </div>
+
+            <div id="projects" class="content-panel">
+                ZUMO Cultural Agenda - Founder & Curator, Valencia, 2026<br><br>
+                An independent cultural platform and agenda born from the need to connect contemporary art with society. ZUMO acts as a bridge to promote local culture, foster active community engagement, and give a visible voice to emerging artists in Valencia.<br><br>
+                <a href="https://www.zumovlc.com" target="_blank" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important;">www.zumovlc.com</a>
+            </div>
+
+            <div id="last-works" class="content-panel">
+                <div class="split-panel">
+                    
+                    <!-- Textos -->
+                    <!-- Textos -->
+                    <div class="split-column">
+                        <span class="underlined">text</span><br><br>
+                        
+                        <!-- Artículo 1 -->
+                        <a href="https://unpocoarte.substack.com/p/nota-al-arte-contemporaneo-en-berlin?r=8of61w&utm_campaign=post-expanded-share&utm_medium=web" target="_blank" data-bg="tunel/2.jpg" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important; display: inline-block; cursor: pointer;">Arqueologías del tránsito: El sujeto, el margen y la fricción del contexto</a>
+                        <br><br><br>
+                        
+                        <!-- Artículo 2 -->
+                        <a href="https://unpocoarte.substack.com/p/nota-de-instalacion?r=8of61w&utm_campaign=post-expanded-share&utm_medium=web" target="_blank" data-bg="fotografia/2.jpg" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important; display: inline-block; cursor: pointer;">nota de sala para COPLA</a>
+                        <br><br><br>
+                        
+                        <!-- PDF TFG -->
+                        <a href="tfg/PHS_Silencios Compartidos Lo invisible y el ser humano  - copia.pdf" target="_blank" data-bg="fotografia/1.jpg" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important; display: inline-block; cursor: pointer;">Silencios Compartidos: Lo invisible y el ser humano a través del arte</a>
+                    </div>
+                    
+                    <!-- Obras visuales -->
+                    <div class="split-column">
+                        <span class="underlined">others</span><br><br>
+                        
+                        <div onclick="toggleGallery('tunel-wrapper')" class="gallery-title" data-bg="tunel/1.jpg">TU(n)EL</div>
+                        
+                        <div id="tunel-wrapper" class="gallery-wrapper">
+                            <div class="project-info">2024, instalación espacial, dimensiones variables</div>
+                            <div id="tunel-slides" class="gallery-slides">
+                                <img src="tunel/1.jpg" alt="TU(n)EL vista 1">
+                                <img src="tunel/2.jpg" alt="TU(n)EL vista 2">
+                                <img src="tunel/3.jpg" alt="TU(n)EL vista 3">
+                                <img src="tunel/4.jpg" alt="TU(n)EL vista 4">
+                                <img src="tunel/5.jpg" alt="TU(n)EL vista 5">
+                                <img src="tunel/6.jpg" alt="TU(n)EL vista 6">
+                                <img src="tunel/7.jpg" alt="TU(n)EL vista 7">
+                                <img src="tunel/8.jpg" alt="TU(n)EL vista 8">
+                                <img src="tunel/9.jpg" alt="TU(n)EL vista 9">
+                                <img src="tunel/10.jpg" alt="TU(n)EL vista 10">
+                                <img src="tunel/11.jpg" alt="TU(n)EL vista 11">
+                                <img src="tunel/12.jpg" alt="TU(n)EL vista 12">
+                                <img src="tunel/13.jpg" alt="TU(n)EL vista 13">
+                                <img src="tunel/14.jpg" alt="TU(n)EL vista 14">
+                                <img src="tunel/15.jpg" alt="TU(n)EL vista 15">
+                                <img src="tunel/16.jpg" alt="TU(n)EL vista 16">
+                                <img src="tunel/17.jpg" alt="TU(n)EL vista 17">
+                                <img src="tunel/18.jpg" alt="TU(n)EL vista 18">
+                                <img src="tunel/19.jpg" alt="TU(n)EL vista 19">
+                                <img src="tunel/20.jpg" alt="TU(n)EL vista 20">
+                                <img src="tunel/21.jpg" alt="TU(n)EL vista 21">
+                                <img src="tunel/22.jpg" alt="TU(n)EL vista 22">
+                                <img src="tunel/23.jpg" alt="TU(n)EL vista 23">
+                                <img src="tunel/24.jpg" alt="TU(n)EL vista 24">
+                                <img src="tunel/25.jpg" alt="TU(n)EL vista 25">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('tunel-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('tunel-slides', 1)">next</span>
+                            </div>
+                        </div>
+                        <br><br>
+
+                        <!-- Proyecto: ni de aca ni de alla -->
+                       
+                        <div onclick="toggleGallery('nideaca-wrapper')" class="gallery-title" data-bg="ni de aca ni de alla/0.jpg">ni de acá ni de allá</div>
+                        <div id="nideaca-wrapper" class="gallery-wrapper">
+                            <div id="nideaca-slides" class="gallery-slides">
+                                <img src="ni de aca ni de alla/0.jpg" alt="ni de aca ni de alla 0">
+                                <img src="ni de aca ni de alla/1.jpg" alt="ni de aca ni de alla 1">
+                                <img src="ni de aca ni de alla/2.jpg" alt="ni de aca ni de alla 2">
+                                <img src="ni de aca ni de alla/3.jpg" alt="ni de aca ni de alla 3">
+                                <img src="ni de aca ni de alla/4.jpg" alt="ni de aca ni de alla 4">
+                                <img src="ni de aca ni de alla/5.jpg" alt="ni de aca ni de alla 5">
+                                <img src="ni de aca ni de alla/6.jpg" alt="ni de aca ni de alla 6">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('nideaca-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('nideaca-slides', 1)">next</span>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div onclick="toggleGallery('silencios-wrapper')" class="gallery-title" data-bg="fotografia/1.jpg">dentro</div>
+                        
+                        <div id="silencios-wrapper" class="gallery-wrapper">
+                            <div class="project-info">2024, inkjet print on paper, 29.7×42 cm</div>
+                            <div id="silencios-slides" class="gallery-slides">
+                                <img src="fotografia/1.jpg" alt="Silencios Compartidos vista 1">
+                                <img src="fotografia/2.jpg" alt="Silencios Compartidos vista 2">
+                                <img src="fotografia/4.jpg" alt="Silencios Compartidos vista 4">
+                                <img src="fotografia/5.jpg" alt="Silencios Compartidos vista 5">
+                                <img src="fotografia/6.jpg" alt="Silencios Compartidos vista 6">
+                                <img src="fotografia/7.jpg" alt="Silencios Compartidos vista 7">
+                                <img src="fotografia/8.jpg" alt="Silencios Compartidos vista 8">
+                                <img src="fotografia/9.jpg" alt="Silencios Compartidos vista 9">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('silencios-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('silencios-slides', 1)">next</span>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div onclick="toggleGallery('interferencias-wrapper')" class="gallery-title" data-bg="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm.jpg">interferencias</div>
+                        
+                        <div id="interferencias-wrapper" class="gallery-wrapper">
+                            <div class="project-info">2025, oil on canvas, 24 x 33 cm</div>
+                            <div id="interferencias-slides" class="gallery-slides">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm.jpg" alt="Interferencias vista 1">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_1.jpg" alt="Interferencias vista 2">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_2.jpg" alt="Interferencias vista 3">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_3.jpg" alt="Interferencias vista 4">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_4.jpg" alt="Interferencias vista 5">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_5.jpg" alt="Interferencias vista 6">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_6.jpg" alt="Interferencias vista 7">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('interferencias-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('interferencias-slides', 1)">next</span>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div onclick="toggleGallery('topologia-wrapper')" class="gallery-title" data-bg="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (1).jpg">topología del vínculo</div>
+                        
+                        <div id="topologia-wrapper" class="gallery-wrapper">
+                            <div class="project-info">2025, installation, variable dimensions</div>
+                            <div id="topologia-slides" class="gallery-slides">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (1).jpg" alt="Topología del vínculo vista 1">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (2).jpg" alt="Topología del vínculo vista 2">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (3).jpg" alt="Topología del vínculo vista 3">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (4).jpg" alt="Topología del vínculo vista 4">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('topologia-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('topologia-slides', 1)">next</span>
+                            </div>
+                        </div>
+                        <br><br>
+                        <div onclick="toggleGallery('mitosis-wrapper')" class="gallery-title" data-bg="Mitosis II/PalomaHernandez_Mitosis II.jpg">Mitosis II</div>
+                        <div id="mitosis-wrapper" class="gallery-wrapper">
+                            <div class="project-info">2025, cast brass</div>
+                            <div id="mitosis-slides" class="gallery-slides">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II.jpg" alt="Mitosis II">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_2.jpg" alt="Mitosis II">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_3.jpg" alt="Mitosis II">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_4.jpg" alt="Mitosis II">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_5.jpg" alt="Mitosis II">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('mitosis-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('mitosis-slides', 1)">next</span>
+                            </div>
+                        </div>
+                        <!-- Proyecto: more cast brass -->
+                        <br><br>
+                        <div onclick="toggleGallery('brass-wrapper')" class="gallery-title" data-bg="fundicion/PHS_GOTA.JPEG">more cast brass</div>
+                        
+                        <div id="brass-wrapper" class="gallery-wrapper">
+                            <div id="brass-slides" class="gallery-slides">
+                                <img src="fundicion/PHS_GOTA.JPEG" alt="more cast brass gota">
+                                <img src="fundicion/Phs_linea.jpeg" alt="more cast brass linea">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('brass-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('brass-slides', 1)">next</span>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto: more paintings -->
+                        <br><br>
+                        <div onclick="toggleGallery('paintings-wrapper')" class="gallery-title" data-bg="pintura/PHS_anjie.jpg">more paintings</div>
+                        
+                        <div id="paintings-wrapper" class="gallery-wrapper">
+                            <div id="paintings-slides" class="gallery-slides">
+                                <img src="pintura/PHS_serpiente.jpg" alt="PHS serpiente">
+                                <img src="pintura/PHS_vegetariana.jpg" alt="PHS vegetariana">
+                                <img src="pintura/PHS_mama.jpg" alt="PHS mama">
+                                <img src="pintura/PHS_mama_detalle.jpg" alt="PHS mama detalle">
+                                <img src="pintura/PHS_mama_detalle_2.jpg" alt="PHS mama detalle 2">
+                                <img src="pintura/PHS_anjie.jpg" alt="PHS anjie">
+                                <img src="pintura/PHS_anjie_detalle (2).jpg" alt="PHS anjie detalle 2">
+                                <img src="pintura/PHS_anjie_detalle.jpg" alt="PHS anjie detalle">
+                                <img src="pintura/PHS_mani.jpg" alt="PHS mani">
+                                <img src="pintura/PHS_mani_detalle.jpg" alt="PHS mani detalle">
+                                <img src="pintura/PHS_niña (2).jpg" alt="PHS niña 2">
+                                <img src="pintura/PHS_niña.jpg" alt="PHS niña">
+                                <img src="pintura/PHS_papa (2).jpg" alt="PHS papa 2">
+                                <img src="pintura/PHS_papa_detalle (2).jpg" alt="PHS papa detalle 2">
+                                <img src="pintura/PHS_papa_detalle.jpg" alt="PHS papa detalle">
+                                <img src="pintura/PHS_pareja (2).jpg" alt="PHS pareja 2">
+                                <img src="pintura/PHS_pareja.jpg" alt="PHS pareja">
+                                <img src="pintura/PHS_piel (2).jpg" alt="PHS piel 2">
+                                <img src="pintura/PHS_Piel.jpg" alt="PHS Piel">
+                            </div>
+                            <div class="gallery-controls">
+                                <span onclick="slideGallery('paintings-slides', -1)">prev</span> 
+                                <span onclick="slideGallery('paintings-slides', 1)">next</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal para las Imágenes -->
+    <div id="image-modal" class="modal">
+        <div class="close-btn" onclick="closeModal()">close</div>
+        <div class="modal-btn" onclick="changeModalImage(-1)">prev</div>
+        <img id="modal-img" class="modal-content" alt="Vista ampliada">
+        <div class="modal-btn" onclick="changeModalImage(1)">next</div>
+    </div>
+
+    <!-- Modal para leer los Textos -->
+    <div id="text-modal" class="modal">
+        <div class="close-btn" onclick="closeText()">close</div>
+        <div id="text-modal-content" class="text-modal-body">
+            <!-- El texto se cargará aquí dentro automáticamente -->
+        </div>
+    </div>
+
+    <script>
+        // 1. Navegación del Menú
+        function showPanel(panelId) {
+            document.querySelectorAll('.content-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(panelId).classList.add('active');
+        }
+
+        // 2. Abrir/Cerrar galería vertical
+        function toggleGallery(id) {
+            const gallery = document.getElementById(id);
+            gallery.classList.toggle('open');
+        }
+
+        // 3. Deslizar galería de imágenes
+        function slideGallery(id, direction) {
+            const container = document.getElementById(id);
+            const moveAmount = container.clientWidth;
+            container.scrollBy({ left: moveAmount * direction, behavior: 'smooth' });
+        }
+
+        // 4. Lógica de Modal de Imágenes (Pantalla completa y teclado)
+        let currentImages = [];
+        let currentIndex = 0;
+
+        function openModal(index, imagesArray) {
+            currentImages = imagesArray;
+            currentIndex = index;
+            document.getElementById('modal-img').src = currentImages[currentIndex].src;
+            document.getElementById('image-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('image-modal').classList.remove('show');
+        }
+
+        function changeModalImage(step) {
+            currentIndex += step;
+            if (currentIndex >= currentImages.length) currentIndex = 0;
+            if (currentIndex < 0) currentIndex = currentImages.length - 1;
+            document.getElementById('modal-img').src = currentImages[currentIndex].src;
+        }
+
+        // 5. Lógica para abrir Textos
+        function openText(id) {
+            const content = document.getElementById(id).innerHTML; 
+            document.getElementById('text-modal-content').innerHTML = content; 
+            document.getElementById('text-modal').classList.add('show'); 
+        }
+
+        function closeText() {
+            document.getElementById('text-modal').classList.remove('show');
+        }
+
+        // 6. Controles de teclado para ambas ventanas (Esc para cerrar)
+        document.addEventListener('keydown', function(event) {
+            const imageModal = document.getElementById('image-modal');
+            const textModal = document.getElementById('text-modal');
+            
+            if (imageModal && imageModal.classList.contains('show')) {
+                if (event.key === 'ArrowRight') changeModalImage(1);
+                if (event.key === 'ArrowLeft') changeModalImage(-1);
+                if (event.key === 'Escape') closeModal();
+            }
+            if (textModal && textModal.classList.contains('show')) {
+                if (event.key === 'Escape') closeText();
+            }
+        });
+
+        // 7. Motor de Hover y clics
+        document.addEventListener('DOMContentLoaded', () => {
+            // Clics en imágenes
+            const galleries = document.querySelectorAll('.gallery-slides');
+            galleries.forEach(gallery => {
+                const images = Array.from(gallery.querySelectorAll('img'));
+                images.forEach((img, index) => {
+                    img.addEventListener('click', function() {
+                        openModal(index, images);
+                    });
+                });
+            });
+
+            // Hover en títulos y textos (fondo dinámico)
+            const bgHover = document.getElementById('bg-hover');
+            const hoverElements = document.querySelectorAll('[data-bg]'); 
+            
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', function() {
+                    const bgImage = this.getAttribute('data-bg');
+                    bgHover.style.backgroundImage = `url('${bgImage}')`;
+                    bgHover.style.opacity = '0.3'; 
+                });
+                el.addEventListener('mouseleave', function() {
+                    bgHover.style.opacity = '0';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
