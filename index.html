@@ -245,39 +245,54 @@
             }
 
             /* Mejora del Modal de imágenes en móvil */
+           /* Controles de galería (Estética minimalista, sin negritas ni redondos) */
+            .gallery-controls {
+                justify-content: center;
+                gap: 40px; /* Separación amplia para no equivocarse al tocar */
+                margin-top: 15px;
+                margin-bottom: 30px;
+            }
+            .gallery-controls span {
+                padding: 10px 15px; /* Área táctil invisible pero amplia */
+                border: none;
+                border-radius: 0;
+                font-weight: normal; /* Respetamos tu regla de no usar bold */
+                border-bottom: 1px solid #0b2545; /* Mismo subrayado que los links */
+            }
+
+            /* Modal de imágenes en móvil (Botones abajo) */
             .modal {
-                gap: 0; /* Quitamos el espacio porque los botones flotarán */
+                gap: 0;
             }
             .modal-content {
-                max-width: 100vw; /* Ahora la imagen puede usar todo el ancho sin miedo */
-                max-height: 80vh;
+                max-width: 100vw;
+                max-height: 75vh; /* Limita la altura de la foto para dejar sitio abajo */
+                margin-bottom: 60px; /* Margen para que la foto no pise los textos */
             }
             .close-btn {
                 top: 15px;
                 right: 15px;
                 padding: 15px;
-                background: rgba(255, 255, 255, 0.9);
-                border-radius: 50%;
+                background: transparent; /* Sin fondo, puramente tipográfico */
                 z-index: 10000;
             }
-            /* Hacemos que los botones floten sobre la foto a la altura del medio */
             .modal-btn {
                 position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                padding: 12px 15px;
-                background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
-                border-radius: 4px;
+                bottom: 25px; /* Fijados abajo del todo de la pantalla */
+                top: auto;
+                transform: none;
+                padding: 10px 20px;
+                background: transparent;
+                box-shadow: none;
+                border-radius: 0;
+                border-bottom: 1px solid #0b2545; /* Estilo link */
                 z-index: 10000;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             }
-            /* Pegamos 'prev' a la izquierda */
-            .modal-btn:nth-child(2) {
-                left: 10px;
+            .modal-btn:nth-child(2) { /* Botón prev */
+                left: 15vw;
             }
-            /* Pegamos 'next' a la derecha */
-            .modal-btn:nth-child(4) {
-                right: 10px;
+            .modal-btn:nth-child(4) { /* Botón next */
+                right: 15vw;
             }
         }
     </style>
