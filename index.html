@@ -181,11 +181,21 @@
             padding-right: 20px;
         }
 
-        /* --- Adaptación para Móviles --- */
+        .project-info {
+            opacity: 0.5;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* --- Adaptación UX para Móviles --- */
         @media (max-width: 768px) {
+            * {
+                font-size: 14px !important; /* Mejora la legibilidad en pantallas pequeñas */
+            }
             .container {
                 flex-direction: column;
-                padding: 12vw 8vw;
+                padding: 10vw 6vw; /* Aprovecha mejor los bordes laterales */
             }
             .left-column {
                 width: 100%;
@@ -194,11 +204,11 @@
             }
             .right-column {
                 width: 100%;
-                text-align: left;
+                text-align: left; /* Textos alineados a la izquierda para mejor lectura */
             }
             .split-panel {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px; /* Más aire entre columnas divididas */
             }
             .split-column {
                 text-align: left;
@@ -206,12 +216,53 @@
             .split-column:empty {
                 display: none;
             }
-        }
-        .project-info {
-            opacity: 0.5;
-            margin-top: 5px;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            
+            /* Zonas de toque (Touch Targets) más amplias */
+            .nav-links {
+                gap: 15px;
+            }
+            .nav-links a {
+                padding: 6px 0; /* Área más cómoda para el dedo */
+            }
+            .gallery-title {
+                padding: 8px 0;
+                display: block; /* Ocupa todo el ancho disponible para facilitar el tap */
+                border-bottom: 1px dashed rgba(11, 37, 69, 0.2) !important; /* Sutil guía visual */
+            }
+            
+            /* Controles de galería adaptados a pulgares */
+            .gallery-controls {
+                justify-content: center; /* Centrados para que queden a mano */
+                gap: 30px;
+                margin-top: 15px;
+                margin-bottom: 30px;
+            }
+            .gallery-controls span {
+                padding: 8px 20px;
+                border: 1px solid rgba(11, 37, 69, 0.3);
+                border-radius: 20px; /* Estilo de botón minimalista */
+                font-weight: bold;
+            }
+
+            /* Mejora del Modal de imágenes en móvil */
+            .modal {
+                gap: 2vw;
+            }
+            .modal-content {
+                max-width: 95vw; /* La imagen ocupa casi todo el ancho de la pantalla */
+                max-height: 75vh;
+            }
+            .close-btn {
+                top: 15px;
+                right: 15px;
+                padding: 15px; /* Botón de cierre más grande */
+                background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para que no se pierda */
+                border-radius: 50%;
+                z-index: 10000;
+            }
+            .modal-btn {
+                padding: 20px 10px; /* Áreas de prev/next laterales más grandes */
+            }
         }
     </style>
 </head>
@@ -300,7 +351,6 @@
             <div id="last-works" class="content-panel">
                 <div class="split-panel">
                     
-                    <!-- Textos -->
                     <!-- Textos -->
                     <div class="split-column">
                         <span class="underlined">text</span><br><br>
