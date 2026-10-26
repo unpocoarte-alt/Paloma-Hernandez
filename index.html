@@ -246,22 +246,38 @@
 
             /* Mejora del Modal de imágenes en móvil */
             .modal {
-                gap: 2vw;
+                gap: 0; /* Quitamos el espacio porque los botones flotarán */
             }
             .modal-content {
-                max-width: 95vw; /* La imagen ocupa casi todo el ancho de la pantalla */
-                max-height: 75vh;
+                max-width: 100vw; /* Ahora la imagen puede usar todo el ancho sin miedo */
+                max-height: 80vh;
             }
             .close-btn {
                 top: 15px;
                 right: 15px;
-                padding: 15px; /* Botón de cierre más grande */
-                background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para que no se pierda */
+                padding: 15px;
+                background: rgba(255, 255, 255, 0.9);
                 border-radius: 50%;
                 z-index: 10000;
             }
+            /* Hacemos que los botones floten sobre la foto a la altura del medio */
             .modal-btn {
-                padding: 20px 10px; /* Áreas de prev/next laterales más grandes */
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                padding: 12px 15px;
+                background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
+                border-radius: 4px;
+                z-index: 10000;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            /* Pegamos 'prev' a la izquierda */
+            .modal-btn:nth-child(2) {
+                left: 10px;
+            }
+            /* Pegamos 'next' a la derecha */
+            .modal-btn:nth-child(4) {
+                right: 10px;
             }
         }
     </style>
@@ -343,7 +359,7 @@
             </div>
 
             <div id="projects" class="content-panel">
-                ZUMO Cultural Agenda - Founder & Curator, Valencia, 2026<br><br>
+                ZUMO Cultural Agenda - Founder, Curator & Web Developer, Valencia, 2026<br><br>
                 An independent cultural platform and agenda born from the need to connect contemporary art with society. ZUMO acts as a bridge to promote local culture, foster active community engagement, and give a visible voice to emerging artists in Valencia.<br><br>
                 <a href="https://www.zumovlc.com" target="_blank" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important;">www.zumovlc.com</a>
             </div>
@@ -376,31 +392,31 @@
                         <div id="tunel-wrapper" class="gallery-wrapper">
                             <div class="project-info">2024, instalación espacial, dimensiones variables</div>
                             <div id="tunel-slides" class="gallery-slides">
-                                <img src="tunel/1.jpg" alt="TU(n)EL vista 1">
-                                <img src="tunel/2.jpg" alt="TU(n)EL vista 2">
-                                <img src="tunel/3.jpg" alt="TU(n)EL vista 3">
-                                <img src="tunel/4.jpg" alt="TU(n)EL vista 4">
-                                <img src="tunel/5.jpg" alt="TU(n)EL vista 5">
-                                <img src="tunel/6.jpg" alt="TU(n)EL vista 6">
-                                <img src="tunel/7.jpg" alt="TU(n)EL vista 7">
-                                <img src="tunel/8.jpg" alt="TU(n)EL vista 8">
-                                <img src="tunel/9.jpg" alt="TU(n)EL vista 9">
-                                <img src="tunel/10.jpg" alt="TU(n)EL vista 10">
-                                <img src="tunel/11.jpg" alt="TU(n)EL vista 11">
-                                <img src="tunel/12.jpg" alt="TU(n)EL vista 12">
-                                <img src="tunel/13.jpg" alt="TU(n)EL vista 13">
-                                <img src="tunel/14.jpg" alt="TU(n)EL vista 14">
-                                <img src="tunel/15.jpg" alt="TU(n)EL vista 15">
-                                <img src="tunel/16.jpg" alt="TU(n)EL vista 16">
-                                <img src="tunel/17.jpg" alt="TU(n)EL vista 17">
-                                <img src="tunel/18.jpg" alt="TU(n)EL vista 18">
-                                <img src="tunel/19.jpg" alt="TU(n)EL vista 19">
-                                <img src="tunel/20.jpg" alt="TU(n)EL vista 20">
-                                <img src="tunel/21.jpg" alt="TU(n)EL vista 21">
-                                <img src="tunel/22.jpg" alt="TU(n)EL vista 22">
-                                <img src="tunel/23.jpg" alt="TU(n)EL vista 23">
-                                <img src="tunel/24.jpg" alt="TU(n)EL vista 24">
-                                <img src="tunel/25.jpg" alt="TU(n)EL vista 25">
+                                <img src="tunel/1.jpg" alt="TU(n)EL vista 1" loading="lazy">
+                                <img src="tunel/2.jpg" alt="TU(n)EL vista 2" loading="lazy">
+                                <img src="tunel/3.jpg" alt="TU(n)EL vista 3" loading="lazy">
+                                <img src="tunel/4.jpg" alt="TU(n)EL vista 4" loading="lazy">
+                                <img src="tunel/5.jpg" alt="TU(n)EL vista 5" loading="lazy">
+                                <img src="tunel/6.jpg" alt="TU(n)EL vista 6" loading="lazy">
+                                <img src="tunel/7.jpg" alt="TU(n)EL vista 7" loading="lazy">
+                                <img src="tunel/8.jpg" alt="TU(n)EL vista 8" loading="lazy">
+                                <img src="tunel/9.jpg" alt="TU(n)EL vista 9" loading="lazy">
+                                <img src="tunel/10.jpg" alt="TU(n)EL vista 10" loading="lazy">
+                                <img src="tunel/11.jpg" alt="TU(n)EL vista 11" loading="lazy">
+                                <img src="tunel/12.jpg" alt="TU(n)EL vista 12" loading="lazy">
+                                <img src="tunel/13.jpg" alt="TU(n)EL vista 13" loading="lazy">
+                                <img src="tunel/14.jpg" alt="TU(n)EL vista 14" loading="lazy">
+                                <img src="tunel/15.jpg" alt="TU(n)EL vista 15" loading="lazy">
+                                <img src="tunel/16.jpg" alt="TU(n)EL vista 16" loading="lazy">
+                                <img src="tunel/17.jpg" alt="TU(n)EL vista 17" loading="lazy">
+                                <img src="tunel/18.jpg" alt="TU(n)EL vista 18" loading="lazy">
+                                <img src="tunel/19.jpg" alt="TU(n)EL vista 19" loading="lazy">
+                                <img src="tunel/20.jpg" alt="TU(n)EL vista 20" loading="lazy">
+                                <img src="tunel/21.jpg" alt="TU(n)EL vista 21" loading="lazy">
+                                <img src="tunel/22.jpg" alt="TU(n)EL vista 22" loading="lazy">
+                                <img src="tunel/23.jpg" alt="TU(n)EL vista 23" loading="lazy">
+                                <img src="tunel/24.jpg" alt="TU(n)EL vista 24" loading="lazy">
+                                <img src="tunel/25.jpg" alt="TU(n)EL vista 25" loading="lazy">
                             </div>
                             <div class="gallery-controls">
                                 <span onclick="slideGallery('tunel-slides', -1)">prev</span> 
@@ -415,13 +431,13 @@
                         <div id="nideaca-wrapper" class="gallery-wrapper">
                             <div class="project-info">2025, inkjet print on paper, 29.7×42 cm</div>
                             <div id="nideaca-slides" class="gallery-slides">
-                                <img src="ni de aca ni de alla/0.jpg" alt="ni de aca ni de alla 0">
-                                <img src="ni de aca ni de alla/1.jpg" alt="ni de aca ni de alla 1">
-                                <img src="ni de aca ni de alla/2.jpg" alt="ni de aca ni de alla 2">
-                                <img src="ni de aca ni de alla/3.jpg" alt="ni de aca ni de alla 3">
-                                <img src="ni de aca ni de alla/4.jpg" alt="ni de aca ni de alla 4">
-                                <img src="ni de aca ni de alla/5.jpg" alt="ni de aca ni de alla 5">
-                                <img src="ni de aca ni de alla/6.jpg" alt="ni de aca ni de alla 6">
+                                <img src="ni de aca ni de alla/0.jpg" alt="ni de aca ni de alla 0" loading="lazy">
+                                <img src="ni de aca ni de alla/1.jpg" alt="ni de aca ni de alla 1" loading="lazy">
+                                <img src="ni de aca ni de alla/2.jpg" alt="ni de aca ni de alla 2" loading="lazy">
+                                <img src="ni de aca ni de alla/3.jpg" alt="ni de aca ni de alla 3" loading="lazy">
+                                <img src="ni de aca ni de alla/4.jpg" alt="ni de aca ni de alla 4" loading="lazy">
+                                <img src="ni de aca ni de alla/5.jpg" alt="ni de aca ni de alla 5" loading="lazy">
+                                <img src="ni de aca ni de alla/6.jpg" alt="ni de aca ni de alla 6" loading="lazy">
                             </div>
                             <div class="gallery-controls">
                                 <span onclick="slideGallery('nideaca-slides', -1)">prev</span> 
@@ -434,14 +450,14 @@
                         <div id="silencios-wrapper" class="gallery-wrapper">
                             <div class="project-info">2024, inkjet print on paper, 29.7×42 cm</div>
                             <div id="silencios-slides" class="gallery-slides">
-                                <img src="fotografia/1.jpg" alt="Silencios Compartidos vista 1">
-                                <img src="fotografia/2.jpg" alt="Silencios Compartidos vista 2">
-                                <img src="fotografia/4.jpg" alt="Silencios Compartidos vista 4">
-                                <img src="fotografia/5.jpg" alt="Silencios Compartidos vista 5">
-                                <img src="fotografia/6.jpg" alt="Silencios Compartidos vista 6">
-                                <img src="fotografia/7.jpg" alt="Silencios Compartidos vista 7">
-                                <img src="fotografia/8.jpg" alt="Silencios Compartidos vista 8">
-                                <img src="fotografia/9.jpg" alt="Silencios Compartidos vista 9">
+                                <img src="fotografia/1.jpg" alt="Silencios Compartidos vista 1" loading="lazy">
+                                <img src="fotografia/2.jpg" alt="Silencios Compartidos vista 2" loading="lazy">
+                                <img src="fotografia/4.jpg" alt="Silencios Compartidos vista 4" loading="lazy">
+                                <img src="fotografia/5.jpg" alt="Silencios Compartidos vista 5" loading="lazy">
+                                <img src="fotografia/6.jpg" alt="Silencios Compartidos vista 6" loading="lazy">
+                                <img src="fotografia/7.jpg" alt="Silencios Compartidos vista 7" loading="lazy">
+                                <img src="fotografia/8.jpg" alt="Silencios Compartidos vista 8" loading="lazy">
+                                <img src="fotografia/9.jpg" alt="Silencios Compartidos vista 9" loading="lazy">
                             </div>
                             <div class="gallery-controls">
                                 <span onclick="slideGallery('silencios-slides', -1)">prev</span> 
@@ -454,13 +470,13 @@
                         <div id="interferencias-wrapper" class="gallery-wrapper">
                             <div class="project-info">2025, oil on canvas, 24 x 33 cm</div>
                             <div id="interferencias-slides" class="gallery-slides">
-                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm.jpg" alt="Interferencias vista 1">
-                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_1.jpg" alt="Interferencias vista 2">
-                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_2.jpg" alt="Interferencias vista 3">
-                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_3.jpg" alt="Interferencias vista 4">
-                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_4.jpg" alt="Interferencias vista 5">
-                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_5.jpg" alt="Interferencias vista 6">
-                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_6.jpg" alt="Interferencias vista 7">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm.jpg" alt="Interferencias vista 1" loading="lazy">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_1.jpg" alt="Interferencias vista 2" loading="lazy">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_2.jpg" alt="Interferencias vista 3" loading="lazy">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_3.jpg" alt="Interferencias vista 4" loading="lazy">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_4.jpg" alt="Interferencias vista 5" loading="lazy">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_5.jpg" alt="Interferencias vista 6" loading="lazy">
+                                <img src="interferencias/PalomaHernandez_Interferencias_2025_oleo sobre lienzo_24x33cm_6.jpg" alt="Interferencias vista 7" loading="lazy">
                             </div>
                             <div class="gallery-controls">
                                 <span onclick="slideGallery('interferencias-slides', -1)">prev</span> 
@@ -473,10 +489,10 @@
                         <div id="topologia-wrapper" class="gallery-wrapper">
                             <div class="project-info">2025, installation, variable dimensions</div>
                             <div id="topologia-slides" class="gallery-slides">
-                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (1).JPG" alt="Topología del vínculo vista 1">
-                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (2).JPG" alt="Topología del vínculo vista 2">
-                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (3).JPG" alt="Topología del vínculo vista 3">
-                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (4).JPG" alt="Topología del vínculo vista 4">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (1).JPG" alt="Topología del vínculo vista 1" loading="lazy">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (2).JPG" alt="Topología del vínculo vista 2" loading="lazy">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (3).JPG" alt="Topología del vínculo vista 3" loading="lazy">
+                                <img src="topologia del vinculo/PalomaHernandez_TopologiaDelVinculo_ceramica (4).JPG" alt="Topología del vínculo vista 4" loading="lazy">
                             </div>
                             <div class="gallery-controls">
                                 <span onclick="slideGallery('topologia-slides', -1)">prev</span> 
@@ -488,11 +504,11 @@
                         <div id="mitosis-wrapper" class="gallery-wrapper">
                             <div class="project-info">2025, cast brass</div>
                             <div id="mitosis-slides" class="gallery-slides">
-                                <img src="Mitosis II/PalomaHernandez_Mitosis II.jpg" alt="Mitosis II">
-                                <img src="Mitosis II/PalomaHernandez_Mitosis II_2.JPG" alt="Mitosis II">
-                                <img src="Mitosis II/PalomaHernandez_Mitosis II_3.JPG" alt="Mitosis II">
-                                <img src="Mitosis II/PalomaHernandez_Mitosis II_4.JPG" alt="Mitosis II">
-                                <img src="Mitosis II/PalomaHernandez_Mitosis II_5.JPG" alt="Mitosis II">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II.jpg" alt="Mitosis II" loading="lazy">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_2.JPG" alt="Mitosis II" loading="lazy">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_3.JPG" alt="Mitosis II" loading="lazy">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_4.JPG" alt="Mitosis II" loading="lazy">
+                                <img src="Mitosis II/PalomaHernandez_Mitosis II_5.JPG" alt="Mitosis II" loading="lazy">
                             </div>
                             <div class="gallery-controls">
                                 <span onclick="slideGallery('mitosis-slides', -1)">prev</span> 
@@ -520,25 +536,25 @@
                         
                         <div id="paintings-wrapper" class="gallery-wrapper">
                             <div id="paintings-slides" class="gallery-slides">
-                                <img src="pintura/PHS_serpiente.JPG" alt="PHS serpiente">
-                                <img src="pintura/PHS_vegetariana.jpg" alt="PHS vegetariana">
-                                <img src="pintura/PHS_mama.jpg" alt="PHS mama">
-                                <img src="pintura/PHS_mama_detalle.jpg" alt="PHS mama detalle">
-                                <img src="pintura/PHS_mama_detalle_2.jpg" alt="PHS mama detalle 2">
-                                <img src="pintura/PHS_anjie.jpg" alt="PHS anjie">
-                                <img src="pintura/PHS_anjie_detalle (2).jpg" alt="PHS anjie detalle 2">
-                                <img src="pintura/PHS_anjie_detalle.jpg" alt="PHS anjie detalle">
-                                <img src="pintura/PHS_mani.jpg" alt="PHS mani">
-                                <img src="pintura/PHS_mani_detalle.jpg" alt="PHS mani detalle">
-                                <img src="pintura/PHS_niña (2).jpg" alt="PHS niña 2">
-                                <img src="pintura/PHS_niña.jpg" alt="PHS niña">
-                                <img src="pintura/PHS_papa (2).jpg" alt="PHS papa 2">
-                                <img src="pintura/PHS_papa_detalle (2).jpg" alt="PHS papa detalle 2">
-                                <img src="pintura/PHS_papa_detalle.jpg" alt="PHS papa detalle">
-                                <img src="pintura/PHS_pareja (2).jpg" alt="PHS pareja 2">
-                                <img src="pintura/PHS_pareja.jpg" alt="PHS pareja">
-                                <img src="pintura/PHS_piel (2).jpg" alt="PHS piel 2">
-                                <img src="pintura/PHS_Piel.jpg" alt="PHS Piel">
+                                <img src="pintura/PHS_serpiente.JPG" alt="PHS serpiente" loading="lazy">
+                                <img src="pintura/PHS_vegetariana.jpg" alt="PHS vegetariana" loading="lazy">
+                                <img src="pintura/PHS_mama.jpg" alt="PHS mama" loading="lazy">
+                                <img src="pintura/PHS_mama_detalle.jpg" alt="PHS mama detalle" loading="lazy">
+                                <img src="pintura/PHS_mama_detalle_2.jpg" alt="PHS mama detalle 2" loading="lazy">
+                                <img src="pintura/PHS_anjie.jpg" alt="PHS anjie" loading="lazy">
+                                <img src="pintura/PHS_anjie_detalle (2).jpg" alt="PHS anjie detalle 2" loading="lazy">
+                                <img src="pintura/PHS_anjie_detalle.jpg" alt="PHS anjie detalle" loading="lazy">
+                                <img src="pintura/PHS_mani.jpg" alt="PHS mani" loading="lazy">
+                                <img src="pintura/PHS_mani_detalle.jpg" alt="PHS mani detalle" loading="lazy">
+                                <img src="pintura/PHS_niña (2).jpg" alt="PHS niña 2" loading="lazy">
+                                <img src="pintura/PHS_niña.jpg" alt="PHS niña" loading="lazy">
+                                <img src="pintura/PHS_papa (2).jpg" alt="PHS papa 2" loading="lazy">
+                                <img src="pintura/PHS_papa_detalle (2).jpg" alt="PHS papa detalle 2" loading="lazy">
+                                <img src="pintura/PHS_papa_detalle.jpg" alt="PHS papa detalle" loading="lazy">
+                                <img src="pintura/PHS_pareja (2).jpg" alt="PHS pareja 2" loading="lazy">
+                                <img src="pintura/PHS_pareja.jpg" alt="PHS pareja" loading="lazy">
+                                <img src="pintura/PHS_piel (2).jpg" alt="PHS piel 2" loading="lazy">
+                                <img src="pintura/PHS_Piel.jpg" alt="PHS Piel" loading="lazy">
                             </div>
                             <div class="gallery-controls">
                                 <span onclick="slideGallery('paintings-slides', -1)">prev</span> 
