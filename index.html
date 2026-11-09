@@ -188,6 +188,26 @@
             line-height: 1.5;
         }
 
+        /* --- Animación Secuencial de Entrada --- */
+            @keyframes fadeUp {
+                0% { opacity: 0; transform: translateY(8px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+
+            /* Aplicamos la animación a los bloques de la izquierda con retrasos diferentes */
+            .left-column > div:nth-child(1) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+            .left-column > div:nth-child(2) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+            .left-column > div:nth-child(3) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.0s; }
+            .left-column > div:nth-child(4) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.4s; }
+            .left-column > div:nth-child(5) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.8s; }
+
+            /* Hacemos que los paneles de la derecha también aparezcan suavemente al hacer clic */
+            .content-panel.active {
+                display: block;
+                opacity: 0;
+                animation: fadeUp 0.6s ease forwards;
+            }
+
         /* --- Adaptación UX para Móviles --- */
         @media (max-width: 768px) {
             * {
@@ -344,7 +364,7 @@
         <!-- Right Column -->
         <div class="right-column">
             
-            <div id="cv" class="content-panel active">
+            <div id="cv" class="content-panel">
                 <div class="split-panel">
                     <div class="split-column"></div>
                     <div class="split-column">
@@ -382,6 +402,9 @@
                         <br><br>
                         soft skills:<br>
                         effective communication, reliable work ethic, and a deep commitment to collaborative practices and ongoing research
+                        <div style="opacity: 0.6; font-style: italic; margin-top: 15px;">
+                            * want to dive deeper? <a href="mailto:unpocoarte@gmail.com?subject=Request:%20Detailed%20CV" style="color: #0b2545; border-bottom: 1px dashed #0b2545 !important; cursor: pointer;">request detailed cv</a>.
+                        </div>
                     </div>
                 </div>
             </div>
