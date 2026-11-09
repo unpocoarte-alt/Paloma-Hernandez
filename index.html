@@ -302,15 +302,17 @@
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                z-index: -1; /* Siempre detrás del texto y galerías */
-                pointer-events: none; /* Permite hacer clic a través de él */
-                opacity: 0.6; /* Sutil y elegante */
+                z-index: 1; /* Lo subimos a la capa 1 para que se vea */
+                pointer-events: none; /* Sigue permitiendo hacer clic a través de él sin estorbar */
+                opacity: 0.4; /* Sutil y elegante para que no moleste a la lectura */
             }
     </style>
 </head>
 <body>
 <canvas id="net-art-canvas"></canvas>
-    <!-- Contenedor del fondo que cambia -->
+ <div class="page-wrapper" style="position: relative; z-index: 2;">
+    <!-- Todo tu código HTML actual (menú, textos, galerías) va aquí -->
+
     <div id="bg-hover"></div>
 
     <div class="container">
@@ -609,7 +611,7 @@
             <!-- El texto se cargará aquí dentro automáticamente -->
         </div>
     </div>
-
+</div>   <!-- Contenedor del fondo que cambia -->
     <script>
         // 1. Navegación del Menú
         function showPanel(panelId) {
