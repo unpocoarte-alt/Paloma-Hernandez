@@ -193,15 +193,21 @@
                 0% { opacity: 0; transform: translateY(8px); }
                 100% { opacity: 1; transform: translateY(0); }
             }
+            
+            /* Animación especial para mantener la sutileza de tu biografía */
+            @keyframes fadeUpBio {
+                0% { opacity: 0; transform: translateY(8px); }
+                100% { opacity: 0.5; transform: translateY(0); }
+            }
 
-            /* Aplicamos la animación a los bloques de la izquierda con retrasos diferentes */
-            .left-column > div:nth-child(1) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
-            .left-column > div:nth-child(2) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
-            .left-column > div:nth-child(3) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.0s; }
-            .left-column > div:nth-child(4) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.4s; }
-            .left-column > div:nth-child(5) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.8s; }
-
-            /* Hacemos que los paneles de la derecha también aparezcan suavemente al hacer clic */
+            /* Secuencia ordenada de aparición para cada elemento de la columna izquierda */
+            .left-column > div:nth-child(1) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; /* Tu nombre */ }
+            .left-column > div:nth-child(2) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; /* El selector en/es */ }
+            .left-column > div:nth-child(3) { opacity: 0; animation: fadeUpBio 0.8s ease forwards 0.8s; /* Biografía 1 */ }
+            .left-column > div:nth-child(4) { opacity: 0; animation: fadeUpBio 0.8s ease forwards 1.2s; /* Biografía 2 */ }
+            .left-column > div:nth-child(5) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.6s; /* Menú */ }
+            .left-column > div:nth-child(6) { opacity: 0; animation: fadeUp 0.8s ease forwards 2.0s; /* Contacto */ }
+            /* Paneles de la derecha */
             .content-panel.active {
                 display: block;
                 opacity: 0;
@@ -340,24 +346,32 @@
         <div class="left-column">
             <div>Paloma Hernández Sánchez</div>
             
-            <div class="bio">
+            <!-- Selector de Idioma -->
+            <div style="margin-top: 5px; margin-bottom: 25px; font-size: 11px; opacity: 0.6;">
+                <span id="btn-en" onclick="setLang('en')" style="cursor: pointer; border-bottom: 1px solid #0b2545;">en</span> / 
+                <span id="btn-es" onclick="setLang('es')" style="cursor: pointer; border-bottom: none;">es</span>
+            </div>
+            
+            <div class="bio" data-en="silence folded into matter,<br>tracing the edges of time and space." data-es="el silencio plegado en la materia,<br>trazando los bordes del tiempo y el espacio.">
                 silence folded into matter,<br>
                 tracing the edges of time and space.
             </div>
 
-            <!-- Tu nuevo título profesional con el margen correcto antes del menú -->
-            <div class="bio">
+            <div class="bio" data-en="Visual Artist & Curator" data-es="Artista Visual y Curadora">
                 Visual Artist & Curator
             </div>
 
             <div class="nav-links">
                 <a onclick="showPanel('cv')">CV</a>
-                <a onclick="showPanel('projects')">Projects</a>
-                <a onclick="showPanel('last-works')">Last works</a>
+                <a onclick="showPanel('projects')" data-en="Projects" data-es="Proyectos">Projects</a>
+                <a onclick="showPanel('last-works')" data-en="Last works" data-es="Últimos trabajos">Last works</a>
+                <a id="install-btn" onclick="toggleSpatialMode()" style="opacity: 0.5; font-style: italic; margin-top: 15px; border-bottom: none !important;" data-en="[ spatial mode ]" data-es="[ modo espacial ]">[ spatial mode ]</a>
             </div>
 
             <div class="contact">
-                contact: <a href="mailto:unpocoarte@gmail.com">unpocoarte@gmail.com</a>
+                <span data-en="contact:" data-es="contacto:">contact:</span> 
+                <!-- Correo con Copy to Clipboard en lugar de mailto -->
+                <span id="contact-email" onclick="copyEmail('contact-email')" style="color: #0b2545; cursor: pointer; border-bottom: 1px solid #0b2545;">unpocoarte@gmail.com</span>
             </div>
         </div>
 
@@ -400,19 +414,28 @@
                         skills:<br>
                         custom web coding, adobe creative cloud, spatial thinking & installations, metalwork, ceramics, painting, among others<br>
                         <br><br>
-                        soft skills:<br>
-                        effective communication, reliable work ethic, and a deep commitment to collaborative practices and ongoing research
                         <div style="opacity: 0.6; font-style: italic; margin-top: 15px;">
-                            * want to dive deeper? <a href="mailto:unpocoarte@gmail.com?subject=Request:%20Detailed%20CV" style="color: #0b2545; border-bottom: 1px dashed #0b2545 !important; cursor: pointer;">request detailed cv</a>.
+                            * <span data-en="want to dive deeper?" data-es="¿quieres saber más?">want to dive deeper?</span> <span id="cv-email" onclick="copyEmail('cv-email')" style="color: #0b2545; border-bottom: 1px dashed #0b2545 !important; cursor: pointer;" data-en="copy my email to request a detailed cv" data-es="copia mi correo para solicitar el cv detallado">copy my email to request a detailed cv</span>.
                         </div>
                     </div>
                 </div>
             </div>
 
+           <!-- 2. PANEL DE PROYECTOS -->
             <div id="projects" class="content-panel">
-                ZUMO Cultural Agenda - Founder, Curator & Web Developer, Valencia, 2026<br><br>
-                An independent cultural platform and agenda born from the need to connect contemporary art with society. ZUMO acts as a bridge to promote local culture, foster active community engagement, and give a visible voice to emerging artists in Valencia.<br><br>
-                <a href="https://www.zumovlc.com" target="_blank" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important;">www.zumovlc.com</a>
+                <div style="margin-bottom: 40px;">
+                    ZUMO Cultural Agenda - Founder, Curator & Web Developer, Valencia, 2026<br><br>
+                    <span data-en="An independent cultural platform and agenda born from the need to connect contemporary art with society. ZUMO acts as a bridge to promote local culture, foster active community engagement, and give a visible voice to emerging artists in Valencia." data-es="Una plataforma y agenda cultural independiente nacida de la necesidad de conectar el arte contemporáneo con la sociedad. ZUMO actúa como puente para promover la cultura local, fomentar la participación comunitaria y dar voz a artistas emergentes en Valencia.">An independent cultural platform and agenda born from the need to connect contemporary art with society. ZUMO acts as a bridge to promote local culture, foster active community engagement, and give a visible voice to emerging artists in Valencia.</span><br><br>
+                    <a href="https://www.zumovlc.com" target="_blank" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important;">www.zumovlc.com</a>
+                </div>
+
+                <!-- Mini-juego Arquitectónico -->
+                <div style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 40px;">
+                    <canvas id="tower-canvas" style="width: 260px; height: 320px; cursor: pointer;"></canvas>
+                    <div style="opacity: 0.4; font-style: italic; text-align: center; margin-top: 10px; font-size: 11px; letter-spacing: 0.5px;">
+                        <span data-en="building more projects..." data-es="construyendo más proyectos...">building more projects...</span>
+                    </div>
+                </div>
             </div>
 
             <div id="last-works" class="content-panel">
@@ -615,7 +638,31 @@
                     </div>
                 </div>
             </div>
-
+             <!-- 4. PANEL DEL SPATIAL MODE -->
+            <div id="spatial-mode-container" class="content-panel" style="width: 100%;">
+                
+                <!-- Menú Curatorial (Controles Arriba) -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; border-bottom: 1px solid rgba(11, 37, 69, 0.2); padding-bottom: 8px;">
+                    <div style="font-size: 11px; opacity: 0.8; font-style: italic;">
+                        <span onclick="toggleAmbientLight()" style="cursor: pointer; border-bottom: 1px dashed rgba(11, 37, 69, 0.4);">[ <span data-en="room light:" data-es="luz de sala:">room light:</span> <span id="amb-label">ON</span> ]</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <span onclick="cycleSpotlightIntensity()" style="cursor: pointer; border-bottom: 1px dashed rgba(11, 37, 69, 0.4);">[ <span data-en="spotlight power:" data-es="potencia focos:">spotlight power:</span> <span id="spot-label">LOW</span> ]</span>
+                    </div>
+                    <div style="font-size: 11px; opacity: 0.8; font-style: italic;">
+                        <span onclick="clearSpatialRoom()" style="cursor: pointer; border-bottom: 1px dashed rgba(11, 37, 69, 0.4);" data-en="[ clear room ]" data-es="[ limpiar sala ]">[ clear room ]</span>
+                    </div>
+                </div>
+                
+                <!-- Lienzo en el Medio -->
+                <canvas id="spatial-canvas" style="width: 100%; height: 45vh; cursor: crosshair; background: #fafafa; transition: background-color 0.8s ease; display: block;"></canvas>
+                
+                <!-- Texto Profesional Honesto y Directo -->
+                <div style="opacity: 0.7; font-style: italic; text-align: right; margin-top: 15px; font-size: 11px; line-height: 1.5;">
+                    <span data-en="technical support for exhibition design, spatial layout, and art installation." data-es="asistencia técnica para diseño de exposiciones, planificación espacial e instalación de obras.">technical support for exhibition design, spatial layout, and art installation.</span><br>
+                    <span style="opacity: 0.6;" data-en="available for institutional and independent art spaces." data-es="disponible para espacios de arte institucionales e independientes.">available for institutional and independent art spaces.</span>
+                </div>
+                
+            </div>
         </div>
     </div>
 
@@ -634,6 +681,7 @@
             <!-- El texto se cargará aquí dentro automáticamente -->
         </div>
     </div>
+   
 </div>   <!-- Contenedor del fondo que cambia -->
     <script>
         // 1. Navegación del Menú
@@ -845,6 +893,369 @@
 
         initParticles();
         animate();
+    </script>
+    <script>
+        let spatialModeActive = false;
+        let spatialCanvas, spatialCtx;
+        let threads = [];
+        let spotlights = [];
+        let isDrawingThread = false;
+        let startX, startY, currentX, currentY;
+        
+        // Variables globales para la luz que hacen funcionar los botones
+        let ambientLightOn = true;
+        let spotIntensityLevel = 1; // 1: LOW, 2: HIGH, 3: OFF
+        const spotLabels = { 1: 'LOW', 2: 'HIGH', 3: 'OFF' };
+
+        function toggleSpatialMode() {
+            const btn = document.getElementById('install-btn');
+            const container = document.getElementById('spatial-mode-container');
+            
+            spatialModeActive = !spatialModeActive;
+
+            if (spatialModeActive) {
+                // Leer el idioma actual para el botón
+                const isEs = document.getElementById('btn-es').style.borderBottom !== 'none';
+                btn.innerText = isEs ? '[ cerrar modo espacial ]' : '[ close spatial mode ]';
+                btn.style.opacity = '1';
+                
+                document.querySelectorAll('.content-panel').forEach(p => p.classList.remove('active'));
+                container.classList.add('active');
+                
+                setTimeout(initSpatialCanvas, 100);
+            } else {
+                const isEs = document.getElementById('btn-es').style.borderBottom !== 'none';
+                btn.innerText = isEs ? '[ modo espacial ]' : '[ spatial mode ]';
+                btn.style.opacity = '0.5';
+                showPanel('last-works');
+            }
+        }
+
+        // Función del botón Room Light
+        function toggleAmbientLight() {
+            ambientLightOn = !ambientLightOn;
+            document.getElementById('amb-label').innerText = ambientLightOn ? 'ON' : 'DIMMED';
+            spatialCanvas.style.backgroundColor = ambientLightOn ? '#fafafa' : '#12161c'; 
+            drawRoom();
+        }
+
+        // Función del botón Spotlight Power
+        function cycleSpotlightIntensity() {
+            spotIntensityLevel = spotIntensityLevel === 3 ? 1 : spotIntensityLevel + 1;
+            document.getElementById('spot-label').innerText = spotLabels[spotIntensityLevel];
+            drawRoom();
+        }
+
+        function clearSpatialRoom() {
+            threads = [];
+            spotlights = [];
+            drawRoom();
+        }
+
+        function initSpatialCanvas() {
+            spatialCanvas = document.getElementById('spatial-canvas');
+            spatialCtx = spatialCanvas.getContext('2d');
+            
+            spatialCanvas.width = spatialCanvas.clientWidth;
+            spatialCanvas.height = spatialCanvas.clientHeight;
+            
+            drawRoom();
+            
+            spatialCanvas.onmousedown = (e) => {
+                const rect = spatialCanvas.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const clickY = e.clientY - rect.top;
+                
+                const w = spatialCanvas.width;
+                const h = spatialCanvas.height;
+                const bwY = h * 0.15;
+                const bwW = w * 0.8; 
+                const bwX = w * 0.1;
+                
+                // Zona sensible para colocar focos en el techo
+                if (clickY <= bwY + 20 && clickX >= bwX && clickX <= bwX + bwW) {
+                    spotlights.push({ x: clickX });
+                    drawRoom();
+                    return;
+                }
+                
+                isDrawingThread = true;
+                startX = clickX;
+                startY = clickY;
+                currentX = startX;
+                currentY = startY;
+            };
+            
+            spatialCanvas.onmousemove = (e) => {
+                if (!isDrawingThread) return;
+                const rect = spatialCanvas.getBoundingClientRect();
+                currentX = e.clientX - rect.left;
+                currentY = e.clientY - rect.top;
+                
+                drawRoom();
+                
+                spatialCtx.beginPath();
+                spatialCtx.moveTo(startX, startY);
+                spatialCtx.lineTo(currentX, currentY);
+                spatialCtx.strokeStyle = ambientLightOn ? 'rgba(200, 20, 20, 0.7)' : 'rgba(235, 40, 40, 0.9)';
+                spatialCtx.lineWidth = 1;
+                spatialCtx.stroke();
+            };
+            
+            spatialCanvas.onmouseup = (e) => {
+                if (!isDrawingThread) return;
+                isDrawingThread = false;
+                threads.push({x1: startX, y1: startY, x2: currentX, y2: currentY});
+                drawRoom();
+            };
+        }
+
+        function drawRoom() {
+            if (!spatialCtx || !spatialCanvas) return;
+            const w = spatialCanvas.width;
+            const h = spatialCanvas.height;
+            
+            spatialCtx.clearRect(0, 0, w, h);
+            
+            const bwX = w * 0.1; 
+            const bwY = h * 0.15;
+            const bwW = w * 0.8; 
+            const bwH = h * 0.7;
+            
+            const lineColor = ambientLightOn ? 'rgba(11, 37, 69, 0.3)' : 'rgba(255, 255, 255, 0.15)';
+            const threadColor = ambientLightOn ? 'rgba(180, 20, 20, 0.8)' : 'rgba(255, 50, 50, 0.95)';
+            
+            if (spotIntensityLevel !== 3) {
+                spatialCtx.globalCompositeOperation = 'screen';
+                
+                spotlights.forEach(spot => {
+                    spatialCtx.save();
+                    const lightPower = spotIntensityLevel === 1 ? 0.3 : 0.6; 
+                    const gradient = spatialCtx.createRadialGradient(spot.x, bwY, 5, spot.x, bwY + bwH, bwW * 0.7);
+                    
+                    const lightColor = ambientLightOn ? '255, 245, 230' : '255, 220, 180'; 
+                    
+                    gradient.addColorStop(0, `rgba(${lightColor}, ${lightPower + 0.2})`);
+                    gradient.addColorStop(0.4, `rgba(${lightColor}, ${lightPower * 0.5})`);
+                    gradient.addColorStop(1, `rgba(${lightColor}, 0)`);
+                    
+                    spatialCtx.fillStyle = gradient;
+                    spatialCtx.beginPath();
+                    spatialCtx.moveTo(spot.x, bwY);
+                    spatialCtx.lineTo(bwX - 50, h);
+                    spatialCtx.lineTo(bwX + bwW + 50, h);
+                    spatialCtx.closePath();
+                    spatialCtx.fill();
+                    spatialCtx.restore();
+                });
+                spatialCtx.globalCompositeOperation = 'source-over'; 
+            }
+
+            spatialCtx.strokeStyle = lineColor;
+            spatialCtx.lineWidth = 1;
+            spatialCtx.beginPath();
+            
+            spatialCtx.rect(bwX, bwY, bwW, bwH);
+            
+            spatialCtx.moveTo(0, 0); spatialCtx.lineTo(bwX, bwY);
+            spatialCtx.moveTo(w, 0); spatialCtx.lineTo(bwX + bwW, bwY);
+            spatialCtx.moveTo(0, h); spatialCtx.lineTo(bwX, bwY + bwH);
+            spatialCtx.moveTo(w, h); spatialCtx.lineTo(bwX + bwW, bwY + bwH);
+            spatialCtx.stroke();
+            
+            spotlights.forEach(spot => {
+                spatialCtx.fillStyle = ambientLightOn ? '#0b2545' : '#888';
+                spatialCtx.fillRect(spot.x - 4, bwY - 5, 8, 5); 
+            });
+
+            spatialCtx.strokeStyle = threadColor;
+            spatialCtx.lineWidth = ambientLightOn ? 1 : 1.5; 
+            threads.forEach(t => {
+                spatialCtx.beginPath();
+                spatialCtx.moveTo(t.x1, t.y1);
+                spatialCtx.lineTo(t.x2, t.y2);
+                spatialCtx.stroke();
+            });
+        }
+    </script>
+    <script>
+        // 1. MOTOR BILINGÜE SUTIL Y PORTAPAPELES (Corregido)
+        let currentLang = 'en'; // Definimos el inglés como base al cargar
+
+        function setLang(lang) {
+            currentLang = lang; // Actualizamos la memoria de la web
+            
+            // Estilo sutil de los botones
+            document.getElementById('btn-en').style.borderBottom = lang === 'en' ? '1px solid #0b2545' : 'none';
+            document.getElementById('btn-es').style.borderBottom = lang === 'es' ? '1px solid #0b2545' : 'none';
+            
+            // Traducir textos
+            document.querySelectorAll(`[data-${lang}]`).forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${lang}`);
+            });
+            
+            // Traducir el botón del modo espacial si el panel está abierto
+            const installBtn = document.getElementById('install-btn');
+            if (spatialModeActive) {
+                installBtn.innerText = lang === 'en' ? '[ close spatial mode ]' : '[ cerrar modo espacial ]';
+            }
+        }
+
+        // 2. COPIADO AL PORTAPAPELES (UX Profesional y Bilingüe)
+        function copyEmail(elementId) {
+            navigator.clipboard.writeText("unpocoarte@gmail.com");
+            const btn = document.getElementById(elementId);
+            
+            const originalText = btn.innerHTML;
+            
+            // Ahora sí, usa el idioma exacto para el mensaje temporal
+            btn.innerText = currentLang === 'es' ? "¡correo copiado!" : "email copied!";
+            btn.style.opacity = "0.5";
+            
+            setTimeout(() => { 
+                btn.innerHTML = originalText;
+                btn.style.opacity = "1";
+            }, 2500);
+        }
+    </script>
+    <script>
+        // MOTOR DEL MINIJUEGO DE LA TORRE (Lógica de Construcción hacia Arriba)
+        let towerCanvas, twrCtx;
+        let towerBlocks = [];
+        let movingBlock;
+        let towerSpeed = 2.5;
+        let towerState = 'play'; 
+        let animationId = null;
+        let currentLevelY = 280; // Controla la altura del bloque que se mueve
+
+        function initTowerGame() {
+            towerCanvas = document.getElementById('tower-canvas');
+            if (!towerCanvas) return;
+            twrCtx = towerCanvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            towerCanvas.width = 260 * dpr;
+            towerCanvas.height = 320 * dpr;
+            twrCtx.scale(dpr, dpr);
+            towerCanvas.style.width = '260px';
+            towerCanvas.style.height = '320px';
+
+            resetTower();
+            towerCanvas.addEventListener('pointerdown', handleTowerClick);
+            
+            if (!animationId) {
+                updateTower();
+            }
+        }
+
+        function resetTower() {
+            // Base fija abajo del todo (y: 300)
+            towerBlocks = [{ x: 60, y: 300, w: 140, h: 20 }]; 
+            currentLevelY = 280; // Siguiente nivel encima de la base
+            movingBlock = { x: 0, y: currentLevelY, w: 140, h: 20, dir: 1 };
+            towerSpeed = 2.5;
+            towerState = 'play';
+        }
+
+        function handleTowerClick(e) {
+            e.preventDefault();
+            
+            if (towerState === 'over') {
+                resetTower();
+                return;
+            }
+            
+            if (towerState === 'play') {
+                let topBlock = towerBlocks[towerBlocks.length - 1];
+                
+                // Efecto Imán (Tolerancia de 6px)
+                let diff = Math.abs(movingBlock.x - topBlock.x);
+                if (diff <= 6) {
+                    movingBlock.x = topBlock.x;
+                }
+
+                let overlapStart = Math.max(movingBlock.x, topBlock.x);
+                let overlapEnd = Math.min(movingBlock.x + movingBlock.w, topBlock.x + topBlock.w);
+                let overlap = overlapEnd - overlapStart;
+
+                if (overlap > 0) {
+                    // Encajado: Añadir a la torre en su nivel actual
+                    towerBlocks.push({ x: overlapStart, y: currentLevelY, w: overlap, h: 20 });
+                    
+                    // Subir un piso para el próximo bloque
+                    currentLevelY -= 20;
+
+                    // Si estamos llegando al techo (y < 100), bajamos todos los bloques
+                    if (currentLevelY < 100) {
+                        towerBlocks.forEach(b => b.y += 20); // Bajar la torre construida
+                        currentLevelY += 20; // Mantener la grúa en su sitio
+                    }
+
+                    // Preparar el siguiente bloque
+                    movingBlock = {
+                        x: 0,
+                        y: currentLevelY,
+                        w: overlap,
+                        h: 20,
+                        dir: Math.random() > 0.5 ? 1 : -1
+                    };
+                    movingBlock.x = movingBlock.dir === 1 ? 0 : 260 - movingBlock.w;
+                    
+                    towerSpeed += 0.2; 
+                } else {
+                    towerState = 'over'; // Colapso
+                }
+            }
+        }
+
+        function updateTower() {
+            const panel = document.getElementById('projects');
+            
+            if (!panel || !panel.classList.contains('active')) {
+                animationId = requestAnimationFrame(updateTower);
+                return;
+            }
+
+            twrCtx.clearRect(0, 0, 260, 320);
+
+            if (towerState === 'play') {
+                movingBlock.x += towerSpeed * movingBlock.dir;
+                if (movingBlock.x <= 0 || movingBlock.x + movingBlock.w >= 260) {
+                    movingBlock.dir *= -1; 
+                }
+            }
+
+            twrCtx.fillStyle = '#0b2545';
+            twrCtx.strokeStyle = '#fafafa';
+            twrCtx.lineWidth = 1;
+
+            // Dibujar la torre asentada
+            towerBlocks.forEach(b => {
+                twrCtx.fillRect(b.x, b.y, b.w, b.h);
+                twrCtx.strokeRect(b.x, b.y, b.w, b.h);
+            });
+
+            // Dibujar el bloque nuevo que se mueve en el aire
+            if (towerState === 'play') {
+                twrCtx.fillRect(movingBlock.x, movingBlock.y, movingBlock.w, movingBlock.h);
+                twrCtx.strokeRect(movingBlock.x, movingBlock.y, movingBlock.w, movingBlock.h);
+            } else if (towerState === 'over') {
+                twrCtx.fillStyle = 'rgba(11, 37, 69, 0.7)';
+                twrCtx.font = "italic 13px Arial";
+                twrCtx.textAlign = "center";
+                
+                const isEs = typeof currentLang !== 'undefined' && currentLang === 'es';
+                twrCtx.fillText(isEs ? "colapso. clic para reiniciar." : "collapsed. click to retry.", 130, 150);
+            }
+
+            animationId = requestAnimationFrame(updateTower);
+        }
+
+        // Arrancar
+        document.addEventListener('DOMContentLoaded', initTowerGame);
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initTowerGame, 100);
+        }
     </script>
 </body>
 </html>
