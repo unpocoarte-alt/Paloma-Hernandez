@@ -200,13 +200,15 @@
                 100% { opacity: 0.5; transform: translateY(0); }
             }
 
-            /* Secuencia ordenada de aparición para cada elemento de la columna izquierda */
-            .left-column > div:nth-child(1) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; /* Tu nombre */ }
-            .left-column > div:nth-child(2) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; /* El selector en/es */ }
-            .left-column > div:nth-child(3) { opacity: 0; animation: fadeUpBio 0.8s ease forwards 0.8s; /* Biografía 1 */ }
-            .left-column > div:nth-child(4) { opacity: 0; animation: fadeUpBio 0.8s ease forwards 1.2s; /* Biografía 2 */ }
-            .left-column > div:nth-child(5) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.6s; /* Menú */ }
-            .left-column > div:nth-child(6) { opacity: 0; animation: fadeUp 0.8s ease forwards 2.0s; /* Contacto */ }
+            /* Aplicamos la animación normal al nombre, menú y contacto */
+            .left-column > div:nth-child(1) { opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+            .left-column > div:nth-child(4) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.4s; }
+            .left-column > div:nth-child(5) { opacity: 0; animation: fadeUp 0.8s ease forwards 1.8s; }
+            .left-column > div:nth-child(6) { opacity: 0; animation: fadeUp 0.8s ease forwards 2.2s; }
+            /* Aplicamos la animación sutil a los textos de biografía (hijos 2 y 3) */
+            .left-column > div:nth-child(2) { opacity: 0; animation: fadeUpBio 0.8s ease forwards 0.6s; }
+            .left-column > div:nth-child(3) { opacity: 0; animation: fadeUpBio 0.8s ease forwards 1.0s; }
+
             /* Paneles de la derecha */
             .content-panel.active {
                 display: block;
@@ -378,45 +380,55 @@
         <!-- Right Column -->
         <div class="right-column">
             
-            <div id="cv" class="content-panel">
-                <div class="split-panel">
-                    <div class="split-column"></div>
-                    <div class="split-column">
-                        Gallery Assistant, KLEMM´S Galerie, Berlin, 2026<br>
-                        Gallery Assistant, Verena Kerfin Gallery, Berlin, 2026<br>
-                        Exhibition Coordinator , Atelier Canyamelar, Valencia, 2023-2025<br>
-                        Customer Service and Sales Training, Valencia, 2022<br>
-                        Conflict Resolution Training for Middle Management, Valencia, 2022<br>
-                        BFA, Politecnic University of Valencia, 2021-2025<br>
-                        Course in Visual Arts, Espacio REA, Buenos Aires, 2019<br>
-                        <br><br>
-                        -<br><br>
-                        <span class="underlined">solo exhibitions:</span><br>
-                        <span class="bold-year">2026</span><br>
-                        <span class="italic-title">Silencios Compartidos</span>, Atelier Canyamelar, Valencia<br>
-                        <br>
-                        <span class="bold-year">2024</span><br>
-                        <span class="italic-title">TU(n)EL</span>, Polytechnic University of Valencia<br>
-                        <br>
-                        <span class="bold-year">2023</span><br>
-                        <span class="italic-title">Mar Blanco</span>, Atelier Canyamelar, Valencia<br>
-                        <br><br>
-                        <span class="underlined">group exhibitions:</span><br>
-                        <span class="bold-year">2024</span><br>
-                        <span class="italic-title">Buidar Plenant</span>, Riba-roja de Túria, Valencia(<a href="catalogoBuidarPlenant.pdf" target="_blank" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important;">catalog</a>)<br>
-                        <span class="italic-title">Oh! My Bag</span>, Royal University of Bhutan, Bhutan<br>
-                        <span class="italic-title">Oh! My Mind</span>, Thammasat University, Thailand<br>
-                        <br>
-                        <span class="bold-year">2023</span><br>
-                        <span class="italic-title">Cuerpos, un nexo al mundo</span>, Chiva, Valencia<br>
-                        <br><br>
-                        -<br><br>
-                        skills:<br>
-                        custom web coding, adobe creative cloud, spatial thinking & installations, metalwork, ceramics, painting, among others<br>
-                        <br><br>
-                        <div style="opacity: 0.6; font-style: italic; margin-top: 15px;">
-                            * <span data-en="want to dive deeper?" data-es="¿quieres saber más?">want to dive deeper?</span> <span id="cv-email" onclick="copyEmail('cv-email')" style="color: #0b2545; border-bottom: 1px dashed #0b2545 !important; cursor: pointer;" data-en="copy my email to request a detailed cv" data-es="copia mi correo para solicitar el cv detallado">copy my email to request a detailed cv</span>.
+            <div id="cv" class="content-panel" style="position: relative; min-height: 400px;">
+                
+                <div id="cv-container" style="transition: opacity 1s ease;width: 100%;">
+                    <div class="split-panel">
+                        <div class="split-column"></div>
+                        <div class="split-column">
+                            Gallery Assistant, KLEMM´S Galerie, Berlin, 2026<br>
+                            Gallery Assistant, Verena Kerfin Gallery, Berlin, 2026<br>
+                            Exhibition Coordinator , Atelier Canyamelar, Valencia, 2023-2025<br>
+                            Customer Service and Sales Training, Valencia, 2022<br>
+                            Conflict Resolution Training for Middle Management, Valencia, 2022<br>
+                            BFA, Politecnic University of Valencia, 2021-2025<br>
+                            Course in Visual Arts, Espacio REA, Buenos Aires, 2019<br>
+                            <br><br>
+                            -<br><br>
+                            <span class="underlined">solo exhibitions:</span><br>
+                            <span class="bold-year">2026</span><br>
+                            <span class="italic-title">Silencios Compartidos</span>, Atelier Canyamelar, Valencia<br>
+                            <br>
+                            <span class="bold-year">2024</span><br>
+                            <span class="italic-title">TU(n)EL</span>, Polytechnic University of Valencia<br>
+                            <br>
+                            <span class="bold-year">2023</span><br>
+                            <span class="italic-title">Mar Blanco</span>, Atelier Canyamelar, Valencia<br>
+                            <br><br>
+                            <span class="underlined">group exhibitions:</span><br>
+                            <span class="bold-year">2024</span><br>
+                            <span class="italic-title">Buidar Plenant</span>, Riba-roja de Túria, Valencia(<a href="catalogoBuidarPlenant.pdf" target="_blank" style="color: #0b2545; border-bottom: 1px solid #0b2545 !important;">catalog</a>)<br>
+                            <span class="italic-title">Oh! My Bag</span>, Royal University of Bhutan, Bhutan<br>
+                            <span class="italic-title">Oh! My Mind</span>, Thammasat University, Thailand<br>
+                            <br>
+                            <span class="bold-year">2023</span><br>
+                            <span class="italic-title">Cuerpos, un nexo al mundo</span>, Chiva, Valencia<br>
+                            <br><br>
+                            -<br><br>
+                            skills:<br>
+                            custom web coding, adobe creative cloud, spatial thinking & installations, metalwork, ceramics, painting, among others<br>
+                            <br><br>
+                            <div style="opacity: 0.6; font-style: italic; margin-top: 15px;">
+                                * <span data-en="want to dive deeper?" data-es="¿quieres saber más?">want to dive deeper?</span> <span id="cv-email" onclick="copyEmail('cv-email')" style="color: #0b2545; border-bottom: 1px dashed #0b2545 !important; cursor: pointer;" data-en="copy my email to request a detailed cv" data-es="copia mi correo para solicitar el cv detallado">copy my email to request a detailed cv</span>.
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <div id="cv-timeout-banner" style="display: none; opacity: 0; transition: opacity 1.2s ease; position: absolute; top: 20px; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; background: transparent;">
+                    <div style="font-style: italic; font-size: 13px; line-height: 1.8; color: #0b2545; text-align: center;">
+                        <span data-en="time elapsed. conversation begins elsewhere." data-es="tiempo transcurrido. la conversación continúa en otro lugar.">time elapsed. conversation begins elsewhere.</span><br><br>
+                        <span id="timeout-email" onclick="copyEmail('timeout-email')" style="cursor: pointer; border-bottom: 1px solid #0b2545; font-size: 14px;" data-en="copy my email to request the complete cv" data-es="copia mi correo para solicitar el cv completo">copy my email to request the complete portfolio</span>.
                     </div>
                 </div>
             </div>
@@ -1255,6 +1267,61 @@
         document.addEventListener('DOMContentLoaded', initTowerGame);
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
             setTimeout(initTowerGame, 100);
+        }
+    </script>
+    <script>
+        let cvTimer = null;
+        let cvSecondsElapsed = 0;
+
+        // Monitor en segundo plano que comprueba cada segundo si estás viendo el CV
+        setInterval(() => {
+            const cvPanel = document.getElementById('cv');
+            // Comprobamos si el panel de CV tiene la clase 'active' que usa tu web
+            if (cvPanel && cvPanel.classList.contains('active')) {
+                // Si el banner ya está visible, no sumamos más
+                const banner = document.getElementById('cv-timeout-banner');
+                if (banner && banner.style.display !== 'flex') {
+                    cvSecondsElapsed++;
+                    if (cvSecondsElapsed >= 30) {
+                        triggerCvFadeOut();
+                    }
+                }
+            } else {
+                // Si sales del CV, reiniciamos el contador de inmediato
+                resetCvTimer();
+            }
+        }, 1000);
+
+        function resetCvTimer() {
+            cvSecondsElapsed = 0;
+            const container = document.getElementById('cv-container');
+            const banner = document.getElementById('cv-timeout-banner');
+            if (container && banner) {
+                container.style.display = 'block';
+                container.style.opacity = '1';
+                banner.style.display = 'none';
+                banner.style.opacity = '0';
+            }
+        }
+
+        function triggerCvFadeOut() {
+            const container = document.getElementById('cv-container');
+            const banner = document.getElementById('cv-timeout-banner');
+            
+            if (!container || !banner) return;
+
+            // 1. Desvanecer el CV original
+            container.style.opacity = '0';
+            
+            setTimeout(() => {
+                container.style.display = 'none';
+                
+                // 2. Mostrar y hacer aparecer el cartel en su lugar exacto
+                banner.style.display = 'flex';
+                setTimeout(() => {
+                    banner.style.opacity = '1';
+                }, 50);
+            }, 1000);
         }
     </script>
 </body>
