@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Paloma Hernández Sánchez</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -217,26 +217,35 @@
             }
 
         /* --- Adaptación UX para Móviles --- */
+        /* Adaptación para Teléfonos Móviles */
         @media (max-width: 768px) {
-            * {
-                font-size: 14px !important; /* Mejora la legibilidad en pantallas pequeñas */
+            
+            /* Ajustes base de contenedor */
+            body { 
+                padding: 10px; /* Un poco de respiro general */
             }
             .container {
-                flex-direction: column;
-                padding: 10vw 6vw; /* Aprovecha mejor los bordes laterales */
+                flex-direction: column !important;
+                padding: 8vw 6vw;
             }
+            
+            /* Apilamiento de columnas */
             .left-column {
-                width: 100%;
+                width: 100% !important;
                 padding-right: 0;
                 margin-bottom: 40px;
+                position: static !important; /* Quita el sticky para que fluya natural */
+                height: auto !important;
             }
             .right-column {
-                width: 100%;
-                text-align: left; /* Textos alineados a la izquierda para mejor lectura */
+                width: 100% !important;
+                text-align: left;
             }
+            
+            /* Divisiones del CV y textos */
             .split-panel {
                 flex-direction: column;
-                gap: 25px; /* Más aire entre columnas divididas */
+                gap: 25px;
             }
             .split-column {
                 text-align: left;
@@ -250,42 +259,26 @@
                 gap: 15px;
             }
             .nav-links a {
-                padding: 6px 0; /* Área más cómoda para el dedo */
+                padding: 8px 0; /* Área más cómoda para el dedo */
             }
             .gallery-title {
-                padding: 8px 0;
-                display: block; /* Ocupa todo el ancho disponible para facilitar el tap */
-                border-bottom: 1px dashed rgba(11, 37, 69, 0.2) !important; /* Sutil guía visual */
+                padding: 10px 0;
+                display: block;
+                border-bottom: 1px dashed rgba(11, 37, 69, 0.2) !important;
             }
             
-            /* Controles de galería adaptados a pulgares */
-            .gallery-controls {
-                justify-content: center; /* Centrados para que queden a mano */
-                gap: 30px;
-                margin-top: 15px;
-                margin-bottom: 30px;
-            }
-            .gallery-controls span {
-                padding: 8px 20px;
-                border: 1px solid rgba(11, 37, 69, 0.3);
-                border-radius: 20px; /* Estilo de botón minimalista */
-                font-weight: bold;
-            }
-
-            /* Mejora del Modal de imágenes en móvil */
-           /* Controles de galería (Estética minimalista, sin negritas ni redondos) */
+            /* Controles de galería (Limpios, estética minimalista) */
             .gallery-controls {
                 justify-content: center;
-                gap: 40px; /* Separación amplia para no equivocarse al tocar */
+                gap: 40px; 
                 margin-top: 15px;
                 margin-bottom: 30px;
             }
             .gallery-controls span {
-                padding: 10px 15px; /* Área táctil invisible pero amplia */
+                padding: 12px 15px; 
                 border: none;
-                border-radius: 0;
-                font-weight: normal; /* Respetamos tu regla de no usar bold */
-                border-bottom: 1px solid #0b2545; /* Mismo subrayado que los links */
+                font-weight: normal; 
+                border-bottom: 1px solid #0b2545; 
             }
 
             /* Modal de imágenes en móvil (Botones abajo) */
@@ -293,34 +286,40 @@
                 gap: 0;
             }
             .modal-content {
-                max-width: 100vw;
-                max-height: 75vh; /* Limita la altura de la foto para dejar sitio abajo */
-                margin-bottom: 60px; /* Margen para que la foto no pise los textos */
+                max-width: 95vw;
+                max-height: 70vh; 
+                margin-bottom: 60px; 
             }
             .close-btn {
                 top: 15px;
                 right: 15px;
                 padding: 15px;
-                background: transparent; /* Sin fondo, puramente tipográfico */
+                background: transparent; 
                 z-index: 10000;
             }
             .modal-btn {
                 position: absolute;
-                bottom: 25px; /* Fijados abajo del todo de la pantalla */
+                bottom: 25px; /* Fijados abajo de la pantalla */
                 top: auto;
                 transform: none;
-                padding: 10px 20px;
+                padding: 15px 25px; /* Botones más fáciles de tocar */
                 background: transparent;
                 box-shadow: none;
                 border-radius: 0;
-                border-bottom: 1px solid #0b2545; /* Estilo link */
+                border: none;
+                border-bottom: 1px solid #0b2545; /* Tu estilo link constante */
                 z-index: 10000;
             }
             .modal-btn:nth-child(2) { /* Botón prev */
-                left: 15vw;
+                left: 10vw;
             }
             .modal-btn:nth-child(4) { /* Botón next */
-                right: 15vw;
+                right: 10vw;
+            }
+
+            /* Ajuste del Spatial Mode en móvil */
+            #spatial-canvas { 
+                height: 50vh !important; 
             }
         }
         /* Fondo de Net-Art Generativo */
@@ -968,12 +967,18 @@
             spatialCanvas = document.getElementById('spatial-canvas');
             spatialCtx = spatialCanvas.getContext('2d');
             
+            // Bloquear el scroll de la pantalla táctil mientras dibujas en el lienzo
+            spatialCanvas.style.touchAction = "none";
+            
             spatialCanvas.width = spatialCanvas.clientWidth;
             spatialCanvas.height = spatialCanvas.clientHeight;
             
             drawRoom();
             
-            spatialCanvas.onmousedown = (e) => {
+            spatialCanvas.addEventListener('pointerdown', (e) => {
+                // Prevenir que el móvil intente hacer otras cosas
+                e.preventDefault(); 
+                
                 const rect = spatialCanvas.getBoundingClientRect();
                 const clickX = e.clientX - rect.left;
                 const clickY = e.clientY - rect.top;
@@ -996,10 +1001,12 @@
                 startY = clickY;
                 currentX = startX;
                 currentY = startY;
-            };
+            });
             
-            spatialCanvas.onmousemove = (e) => {
+            spatialCanvas.addEventListener('pointermove', (e) => {
                 if (!isDrawingThread) return;
+                e.preventDefault();
+                
                 const rect = spatialCanvas.getBoundingClientRect();
                 currentX = e.clientX - rect.left;
                 currentY = e.clientY - rect.top;
@@ -1012,14 +1019,23 @@
                 spatialCtx.strokeStyle = ambientLightOn ? 'rgba(200, 20, 20, 0.7)' : 'rgba(235, 40, 40, 0.9)';
                 spatialCtx.lineWidth = 1;
                 spatialCtx.stroke();
-            };
+            });
             
-            spatialCanvas.onmouseup = (e) => {
+            spatialCanvas.addEventListener('pointerup', (e) => {
+                if (!isDrawingThread) return;
+                e.preventDefault();
+                isDrawingThread = false;
+                threads.push({x1: startX, y1: startY, x2: currentX, y2: currentY});
+                drawRoom();
+            });
+            
+            // Por si el dedo sale del lienzo mientras dibuja
+            spatialCanvas.addEventListener('pointerleave', (e) => {
                 if (!isDrawingThread) return;
                 isDrawingThread = false;
                 threads.push({x1: startX, y1: startY, x2: currentX, y2: currentY});
                 drawRoom();
-            };
+            });
         }
 
         function drawRoom() {
